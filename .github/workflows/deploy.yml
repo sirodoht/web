@@ -18,5 +18,10 @@ jobs:
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
 
+    - name: Add known_hosts
+      run: |
+        ssh-keyscan -H brick.01z.io >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+
     - name: Run deploy
       run: ./deploy.sh
