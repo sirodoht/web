@@ -1,0 +1,12 @@
+sirodoht.com {
+	root * /var/www/sirodoht
+	file_server {
+		hide .git deploy.sh
+	}
+	encode zstd gzip
+	header ?Cache-Control "no-cache"
+	log {
+		output stdout
+		format console
+	}
+}
