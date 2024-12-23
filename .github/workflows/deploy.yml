@@ -13,10 +13,8 @@ jobs:
     - name: Load SSH key
       run: |
         mkdir -p ~/.ssh/
-        echo "$SSH_KEY" > ~/.ssh/server.key
-        chmod 600 ~/.ssh/server.key
-        eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/server.key
+        echo "$SSH_KEY" > ~/.ssh/id_ed25519
+        chmod 600 ~/.ssh/id_ed25519
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
 
