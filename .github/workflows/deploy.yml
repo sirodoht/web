@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
     - uses: actions/checkout@v4
 
@@ -15,6 +15,8 @@ jobs:
         mkdir -p ~/.ssh/
         echo "$SSH_KEY" > ~/.ssh/server.key
         chmod 600 ~/.ssh/server.key
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/server.key
       env:
         SSH_KEY: ${{ secrets.SSH_KEY }}
 
@@ -25,5 +27,3 @@ jobs:
 
     - name: Run deploy
       run: ./deploy.sh
-      env:
-        SSH_KEY: ${{ secrets.SSH_KEY }}
